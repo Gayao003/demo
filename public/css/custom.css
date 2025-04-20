@@ -1,0 +1,36 @@
+/* Custom CSS styles */
+.text-visible {
+    color: #000 !important; /* Force black text */
+}
+
+.action-button {
+    background-color: #3b82f6;
+    color: white !important;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+    font-weight: 500;
+}
+
+.action-button.view {
+    background-color: #3b82f6;
+}
+
+.action-button.edit {
+    background-color: #f59e0b;
+}
+
+.action-button.delete {
+    background-color: #ef4444;
+}
+
+/* Force text colors for inputs */
+input, textarea, select, button {
+    color: #000 !important;
+}
+
+/* Button with white text */
+.btn-white-text {
+    color: white !important;
+} 
