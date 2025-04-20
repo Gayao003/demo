@@ -73,4 +73,23 @@ class SecureNoteController extends Controller
 
         return redirect()->route('secure.notes.index')->with('success', 'Note deleted successfully');
     }
+    
+    // SECURE: Demonstrate limited search capability
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $validatedData = $request->validate([
+            'query' => 'required|string|max:100',
+        ]);
+        
+        // Only search within user's own notes - limits search scope
+        $notes = Auth::user()->notes()
+            ->where(function($q) use ($query) {
+                $q->where('title', 'like', "%$query%")
+                  ->orWhere('content', 'like', "%$query%");
+            })
+            ->get();
+            
+        return view('secure.notes.search-results', compact('notes', 'query'));
+    }
 }

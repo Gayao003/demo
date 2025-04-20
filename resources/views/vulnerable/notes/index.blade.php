@@ -11,15 +11,24 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-semibold text-visible">My Notes</h3>
-                        <a href="{{ route('vulnerable.notes.create') }}"
-   class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded action-button">
-    Create New Note
-</a>
+                        <div class="flex space-x-2">
+                            <form action="{{ route('vulnerable.notes.search') }}" method="GET" class="flex">
+                                <input type="text" name="query" placeholder="Search notes..." class="px-2 py-1 border rounded text-visible">
+                                <button type="submit" class="bg-blue-500 text-white px-2 py-1 rounded ml-1 btn-black-text">Search</button>
+                            </form>
+                            <a href="{{ route('vulnerable.notes.create') }}" class="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded btn-black-text">
+                                Create New Note
+                            </a>
+                        </div>
                     </div>
 
                     <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
                         <p class="font-bold">Warning: Vulnerable Implementation</p>
                         <p>This section demonstrates an IDOR vulnerability. Try accessing another user's note by directly modifying the note ID in the URL.</p>
+                        <p class="mt-2">Additional vulnerability:</p>
+                        <ul class="list-disc ml-5">
+                            <li>The search function can leak other users' notes</li>
+                        </ul>
                     </div>
                     
                     @if(count($notes) > 0)

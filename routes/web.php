@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/notes/{id}/edit', [VulnerableNoteController::class, 'edit'])->name('notes.edit');
         Route::put('/notes/{id}', [VulnerableNoteController::class, 'update'])->name('notes.update');
         Route::delete('/notes/{id}', [VulnerableNoteController::class, 'destroy'])->name('notes.destroy');
+        
+        // Search functionality
+        Route::get('/notes-search', [VulnerableNoteController::class, 'search'])->name('notes.search');
     });
     
     // Secure Notes Routes - demonstrates how to prevent IDOR
@@ -45,6 +48,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/notes/{id}/edit', [SecureNoteController::class, 'edit'])->name('notes.edit');
         Route::put('/notes/{id}', [SecureNoteController::class, 'update'])->name('notes.update');
         Route::delete('/notes/{id}', [SecureNoteController::class, 'destroy'])->name('notes.destroy');
+        
+        // Search functionality
+        Route::get('/notes-search', [SecureNoteController::class, 'search'])->name('notes.search');
     });
 });
 

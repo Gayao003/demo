@@ -73,4 +73,18 @@ class VulnerableNoteController extends Controller
 
         return redirect()->route('vulnerable.notes.index')->with('success', 'Note deleted successfully');
     }
+    
+    // VULNERABLE: Allows searching through ALL notes
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        
+        // VULNERABLE: No input validation or sanitization
+        // VULNERABLE: Searches ALL notes, not just user's notes
+        $notes = Note::where('title', 'like', "%$query%")
+                ->orWhere('content', 'like', "%$query%")
+                ->get();
+                
+        return view('vulnerable.notes.search-results', compact('notes', 'query'));
+    }
 }
