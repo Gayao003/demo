@@ -3,6 +3,8 @@
 use App\Http\Controllers\VulnerableNoteController;
 use App\Http\Controllers\SecureNoteController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VulnerableProfileController;
+use App\Http\Controllers\SecureProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +39,10 @@ Route::middleware('auth')->group(function () {
         
         // Search functionality
         Route::get('/notes-search', [VulnerableNoteController::class, 'search'])->name('notes.search');
+        
+        // Vulnerable Profile Routes
+        Route::get('/profile', [VulnerableProfileController::class, 'edit'])->name('profile.edit');
+        Route::post('/profile', [VulnerableProfileController::class, 'update'])->name('profile.update');
     });
     
     // Secure Notes Routes - demonstrates how to prevent IDOR
@@ -51,6 +57,10 @@ Route::middleware('auth')->group(function () {
         
         // Search functionality
         Route::get('/notes-search', [SecureNoteController::class, 'search'])->name('notes.search');
+        
+        // Secure Profile Routes
+        Route::get('/profile', [SecureProfileController::class, 'edit'])->name('profile.edit');
+        Route::post('/profile', [SecureProfileController::class, 'update'])->name('profile.update');
     });
 });
 
